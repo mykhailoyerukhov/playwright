@@ -16,10 +16,10 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Set up Node.js
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
         node-version: '22.x'  # Убедитесь, что версия Node.js соответствует вашей.
 
@@ -59,17 +59,19 @@ jobs:
         git config --global user.email "actions@github.com"
         git checkout --orphan gh-pages
         git rm -rf .
-        mv allure-report/* .  # Перемещаем отчет в корень
+        mv allure-report/* .
         git add .
         git commit -m "Deploy Allure report"
         git push --force --set-upstream origin gh-pages
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   deploy-gh-pages:
     needs: test
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Setup GitHub Pages branch
       run: |
