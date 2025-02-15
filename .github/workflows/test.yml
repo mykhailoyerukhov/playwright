@@ -37,7 +37,7 @@ jobs:
 
     - name: Run Playwright tests
       run:
-        npm run test  # Запустите ваши тесты
+        npm run test
 
     - name: Save Allure results
       run: mkdir -p allure-results
