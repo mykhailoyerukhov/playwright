@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "playwright test",
+    "test": "playwright test --reporter=line,allure",
     "test:pl": "npx playwright test tests/*",
     "test:pl-ui": "npx playwright test tests/* --ui",
     "test:pl-headed": "npx playwright test tests/* --headed",
