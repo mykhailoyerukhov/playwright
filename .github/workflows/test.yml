@@ -26,16 +26,18 @@ jobs:
         npm install
         npm install -g allure-commandline
         npm install --save-dev @playwright/test allure-playwright
+    
+    - name: Install Playwright with dependencies
+      run: npx playwright install --with-deps
 
     - name: Run Playwright tests
-      run: |
-        npx playwright install  # Установите браузеры Playwright
+      run:
         npm run test  # Запустите ваши тесты
 
     - name: Save Allure results
       run: |
         mkdir -p allure-results
-        cp -r allure-report/results/* allure-results/  # Путь до данных Allure
+        cp -r allure-report/results/* allure-results/
 
     - name: Generate Allure report
       run: |
@@ -76,7 +78,7 @@ jobs:
 
     - name: Publish Allure report to GitHub Pages
       run: |
-        mv allure-report/* .  # Перемещаем отчет в корень
+        mv allure-report/* .
         git add .
         git commit -m "Deploy Allure Report"
         git push origin gh-pages
