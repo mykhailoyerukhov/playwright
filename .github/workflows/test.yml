@@ -58,28 +58,3 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./allure-report
     
-  deploy-gh-pages:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-    
-    - name: Download Allure report artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: allure-report
-
-    - name: Setup GitHub Pages branch
-      run: |
-        git fetch origin
-        git checkout gh-pages || git checkout --orphan gh-pages
-        git reset --hard
-        git clean -f -d
-
-    - name: Publish Allure report to GitHub Pages
-      run: |
-        mv allure-report/* .
-        git add .
-        git commit -m "Deploy Allure Report"
-        git push origin gh-pages
